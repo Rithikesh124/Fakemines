@@ -1166,7 +1166,7 @@
         };
     }
             }
-    }
+    
 
     function loadSettings() {
         const defaults = {
