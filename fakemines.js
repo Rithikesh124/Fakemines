@@ -1140,7 +1140,7 @@
 
     async function verifyKey(key) {
         try {
-            const response = await fetch('https://soulapi.vercel.app/verify', {
+            const response = await fetch('https://soul-key.vercel.app/api/key', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
