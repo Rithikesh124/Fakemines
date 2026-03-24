@@ -1139,20 +1139,33 @@
     }
 
     async function verifyKey(key) {
-        try {
-            const response = await fetch('https://soul-key.vercel.app/api/key', {
-                method: 'POST',
+    try {
+        const response = await fetch(
+            "https://soul-key.vercel.app/api/key?key=" + encodeURIComponent(key),
+            {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-Device-ID': generateDeviceId()
-                },
-                body: JSON.stringify({ key })
-            });
-            return await response.json();
-        } catch (error) {
-            console.error('Verification error:', error);
-            return { error: 'Connection failed' };
-        }
+                    "X-Device-ID": generateDeviceId()
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        // 🔥 Convert backend format → your script format
+        return {
+            status: data.success ? "success" : "error",
+            error: data.message
+        };
+
+    } catch (error) {
+        console.error("Verification error:", error);
+        return {
+            status: "error",
+            error: "Connection failed"
+        };
+    }
+            }
     }
 
     function loadSettings() {
